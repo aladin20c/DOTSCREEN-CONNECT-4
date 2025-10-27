@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dotscreen Connect-4</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <div class="header">
+            <h1 class="title">Dotscreen Connect-4</h1>
+            <p id="rules">Play alternates until one player gets FOUR checkers of his or her color in a row. The four in a row can be horizontal, vertical or diagonal.</p>
+        </div>
+
+        <div class="game-container">
+
+            <div class="board-section">
+                <div class="board" id="board"></div>
+            </div>
+
+            <div class="stats-section">
+                
+                <div class="players-section">
+                    <div class="section-title">Players</div>
+                    
+                    <div class="player-box" id="player1">
+                        <div class="player-dot" id="player-dot-1"></div>
+                        <span class="player-label">Player 1</span>
+                    </div>
+
+                    <div class="player-box" id="player2">
+                        <div class="player-dot" id="player-dot-2"></div>
+                        <span class="player-label">Player 2</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="end-game-windoow">
+            <div id="end-game-content">
+                <h3 class="section-title"> Game Over</h3>
+                <div id="end-game-display"></div>
+                <button class="btn-restart" onclick="restartGame()">Play Again</button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script src="./main.js"></script>
+</body>
+</html>
