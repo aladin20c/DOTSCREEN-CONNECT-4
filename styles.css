@@ -192,6 +192,22 @@ body {
 }
 
 
+@keyframes drop {
+    from {
+        transform: translateY(-500px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cell.falling {
+    animation: drop 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+
 
 /******************/
 /*end game section*/

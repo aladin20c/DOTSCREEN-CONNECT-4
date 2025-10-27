@@ -7,6 +7,7 @@ const PLAYER1 = 'player1';
 const PLAYER2 = 'player2';
 let currentPlayer = PLAYER1;
 let gameOver = false;
+let noDropAllowed = false;
 let board = [];
 
 
@@ -31,7 +32,7 @@ function renderBoard() {
         for (let col = 0; col < COLS; col++) {
             const cell = document.createElement('button');
             const value = board[row][col];
-            cell.className = 'cell ' + (value || 'empty');
+            cell.className = 'cell ' + (value || '');
             cell.onclick = () => dropPiece(col);
             cell.disabled = gameOver;
             boardEl.appendChild(cell);
@@ -42,23 +43,35 @@ function renderBoard() {
 
 function dropPiece(col) {
     if (gameOver) return;
+    if (noDropAllowed) return;
     // lowest empty row in column
     for (let row = ROWS - 1; row >= 0; row--) {
         if (board[row][col] === null) {
             board[row][col] = currentPlayer;
+            //renderBoard();
+            const cellIndex = row * COLS + col;
+            const cells = document.querySelectorAll('.cell');
+            cells[cellIndex].className = 'cell ' +  currentPlayer;
+            cells[cellIndex].classList.add('falling');
 
-            if (checkWin(row, col)) {
-                gameOver = true;
-                showWinner(currentPlayer);
-            }else if (checkfull()){
-                gameOver = true;
-                showWinner('');
-            } else {
-                currentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
-                updatePlayerDisplay();
-            }
 
-            renderBoard();
+            noDropAllowed = true;
+            setTimeout(() => {
+                if (checkWin(row, col)) {
+                    gameOver = true;
+                    showWinner(currentPlayer);
+                }else if (checkfull()){
+                    gameOver = true;
+                    showWinner('');
+                } else {
+                    currentPlayer = currentPlayer === PLAYER1 ? PLAYER2 : PLAYER1;
+                    updatePlayerDisplay();
+                }
+                noDropAllowed = false;
+            }, 500);
+
+
+
             return;
         }
     }
